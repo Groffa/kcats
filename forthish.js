@@ -25,7 +25,7 @@ kcats.defineModule(function() {
 			s += 'For examples, see:\n';
 			//s += 'http://galileo.phys.virginia.edu/classes/551.jvn.fall01/primer.htm\n';
 			s += 'http://thebeez.home.xs4all.nl/ForthPrimer/Forth_primer.html';
-			kcats.print(s, true);
+			kcats.print(s, { delay: true });
 		},
 		
 		stackOk: function (min) {
