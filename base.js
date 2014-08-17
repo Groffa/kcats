@@ -141,6 +141,11 @@ kcats.print = function (s, delay, callback) {
 	}
 };
 
+kcats.newLine = function () {
+	var divNode = document.createElement('div');
+	kcats.ui.screen.appendChild(divNode);
+};
+
 kcats.debugPrint = function (s) {
 	if (kcats.debugMode) {
 		kcats.print('??? ' + s);
