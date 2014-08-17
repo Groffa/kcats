@@ -13,6 +13,9 @@ kcats = expand(kcats, {
 		caret: {
 			symbol: '&blk14;',		// Graphics used for the blinking caret
 			delay: 250
+		},
+		input: {		// Functions for restricting/hindering user input
+			restrictTo: null
 		}
 	}
 });
@@ -97,7 +100,9 @@ kcats.handleKey = function (keyCode) {
 	}
 		
 	default:
-		kcats.keyboard.buffer.push(keyCode);
+		if (kcats.keyboard.input.restrictTo === null || kcats.keyboard.input.restrictTo.test(String.fromCharCode(keyCode))) { 
+			kcats.keyboard.buffer.push(keyCode);
+		}
 		break;
 	}
 	kcats.ui.keyboardDisplay.textContent = kcats.keyboard.buffer.toString();
