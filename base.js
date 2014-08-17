@@ -14,8 +14,9 @@ kcats = expand(kcats, {
 			symbol: '&blk14;',		// Graphics used for the blinking caret
 			delay: 250
 		},
-		input: {		// Functions for restricting/hindering user input
-			restrictTo: null		// Expects a regular expression. If null, everything's allowed.
+		input: {
+			restrictTo: null,		// A regular expression that defines what input to allow (null = everything)
+			prompt: null
 		}
 	}
 });
@@ -37,6 +38,7 @@ kcats.bindUI = function () {
 	
 	kcats.ui.keyboardCaret = document.getElementsByClassName('caret')[0];
 	kcats.ui.keyboardDisplay = document.getElementById('keyboardDisplay');
+	kcats.ui.keyboardPrompt = document.getElementById('keyboardPrompt');
 	kcats.ui.screen = document.getElementById('screen');
 	
 	kcats.ui.keyboardCaret.innerHTML = kcats.keyboard.caret.symbol;
@@ -49,6 +51,11 @@ kcats.toggleCaret = function () {
 	} else {
 		kcats.ui.keyboardCaret.style.visibility = '';
 	}
+};
+
+kcats.setPrompt = function (text) {
+	kcats.keyboard.input.prompt = text;
+	kcats.ui.keyboardPrompt.innerHTML = text;
 };
 
 kcats.handleKeyDown = function (ev) {
@@ -187,7 +194,7 @@ kcats.defineModule = function (fn) {
 
 kcats.eval = function (text) {
 	kcats.keyboard.history.push(text);
-	kcats.print(text, { klass: 'userinput' });
+	kcats.print((kcats.keyboard.input.prompt !== null ? kcats.keyboard.input.prompt : '') + text, { klass: 'userinput' });
 	if (text.startsWith('_')) {
 		// built-in always starts with _
 		kcats.evalBuiltin(text);
