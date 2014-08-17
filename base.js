@@ -114,12 +114,11 @@ kcats.print = function (s, delay, callback) {
 		return;
 	}
 	var delay = delay || false;
-	var divNode = document.createElement('span');
+	var divNode = document.createElement('div');
 	var textNode = document.createTextNode(s);
 	var index = 0;
 	var slowPrint = function () {
 		if (s.charAt(index) === '\n') {
-			kcats.newLine();
 			kcats.print(s.substring(++index), delay, callback);
 			return;
 		}
@@ -143,6 +142,7 @@ kcats.print = function (s, delay, callback) {
 
 kcats.newLine = function () {
 	var divNode = document.createElement('div');
+	divNode.appendChild(document.createTextNode('\u00A0'));
 	kcats.ui.screen.appendChild(divNode);
 };
 
