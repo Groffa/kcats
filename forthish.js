@@ -14,18 +14,16 @@ kcats.defineModule(function() {
 		startup: function () {
 			kcats.print('module ' + this.name + ' starting up');
 			this.defineDict();
+			kcats.setPrompt('->');
 			kcats.clearScreen();
 			this.printGreeting();
 		},
 		
 		printGreeting: function () {
-			var s = '';
-			s = 'Welcome to ' + this.name + '.\n';
-			s += 'This module accepts a subset of Forth\'s syntax.\n';
-			s += 'For examples, see:\n';
-			//s += 'http://galileo.phys.virginia.edu/classes/551.jvn.fall01/primer.htm\n';
-			s += 'http://thebeez.home.xs4all.nl/ForthPrimer/Forth_primer.html';
-			kcats.print(s, { delay: true });
+			kcats.print('Welcome to ' + this.name + '.');
+			kcats.newLine();
+			kcats.print('This module accepts a subset of Forth\'s syntax.');
+			kcats.print('For examples, see: http://thebeez.home.xs4all.nl/ForthPrimer/Forth_primer.html');
 		},
 		
 		stackOk: function (min) {
