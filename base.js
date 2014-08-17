@@ -1,6 +1,6 @@
 // kcats - by Jensan
 kcats = expand(kcats, {
-	version: '0.1.201412',
+	version: '0.1',
 	ui: kcats.ui || {},
 	debugMode: false,
 	module: {
