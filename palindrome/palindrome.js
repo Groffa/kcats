@@ -52,7 +52,8 @@ kcats.defineModule(function() {
 				return;
 			}
 			
-			kcats.print('You typed: ' + line);
+			kcats.print('You typed: ', { newLine: false });
+			kcats.print(line, { klass: 'userinput', newLine: false });
 			
 			if (isPalindrome(line)) {
 				lastPalindrome = line;
