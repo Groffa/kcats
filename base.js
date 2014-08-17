@@ -3,6 +3,7 @@ kcats = expand(kcats, {
 	version: '0.1',
 	ui: kcats.ui || {},
 	debugMode: false,
+	useBuiltins: true,
 	module: {
 		definition: null,		// A function defining the module
 		instance: null			// Instantiated module (from definition above)
@@ -174,7 +175,7 @@ kcats.defineModule = function (fn) {
 kcats.eval = function (text) {
 	kcats.keyboard.history.push(text);
 	kcats.print((kcats.keyboard.input.prompt !== null ? kcats.keyboard.input.prompt : '') + text, { klass: 'userinput' });
-	if (text.startsWith('_')) {
+	if (kcats.useBuiltins && text.startsWith('_')) {
 		// built-in always starts with _
 		kcats.evalBuiltin(text);
 	} else {
