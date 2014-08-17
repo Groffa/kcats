@@ -187,7 +187,7 @@ kcats.defineModule = function (fn) {
 
 kcats.eval = function (text) {
 	kcats.keyboard.history.push(text);
-	kcats.print(text);
+	kcats.print(text, { klass: 'userinput' });
 	if (text.startsWith('_')) {
 		// built-in always starts with _
 		kcats.evalBuiltin(text);
