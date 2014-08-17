@@ -39,6 +39,8 @@ kcats.defineModule(function() {
 		name: 'Palindrome',
 	
 		startup: function () {
+			kcats.clearScreen();
+			kcats.useBuiltins = false;
 			kcats.print('Starting up module! This is the palindrome program.');
 			kcats.print('I\'ll determine whether or not you typed in a palindrome.');
 			kcats.print('(I\'ll just look at letters a-z and numbers.)');
