@@ -15,7 +15,7 @@ kcats = expand(kcats, {
 			delay: 250
 		},
 		input: {		// Functions for restricting/hindering user input
-			restrictTo: null
+			restrictTo: null		// Expects a regular expression. If null, everything's allowed.
 		}
 	}
 });
