@@ -50,7 +50,10 @@ kcats.loadModule = function (src) {
 		scriptTag.src = src;
 		scriptTag.onload = function () {
 			kcats.debugPrint('Module ' + src + ' loaded');
-		}
+		};
+		scriptTag.onerror = function () {
+			kcats.print('!!! Failed loading module ' + src);
+		};
 		document.getElementsByTagName('head')[0].appendChild(scriptTag);
 	}
 };
