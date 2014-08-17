@@ -114,11 +114,12 @@ kcats.print = function (s, delay, callback) {
 		return;
 	}
 	var delay = delay || false;
-	var divNode = document.createElement('div');
+	var divNode = document.createElement('span');
 	var textNode = document.createTextNode(s);
 	var index = 0;
 	var slowPrint = function () {
 		if (s.charAt(index) === '\n') {
+			kcats.newLine();
 			kcats.print(s.substring(++index), delay, callback);
 			return;
 		}
