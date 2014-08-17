@@ -118,45 +118,24 @@ kcats.handleKey = function (keyCode) {
 /**
  * Prints a text to the screen.
  * @param s What to print
- * @param delay (Optional) If true, will print the characters one after another with a slight delay (default: false)
- * @param callback (Optional) Function to call upon print completion
+ * @param cfg (optional) Config object { klass: CSS-class to use. callback: function. newLine: if false, keep text on same line }
  */
 kcats.print = function (s, cfg) {
 	if (typeof s === 'undefined') {
 		return;
 	}
 	var cfg = expand(cfg, {
-		delay: false,
 		callback: null,
-		klass: null
+		klass: null,
+		newLine: true
 	});
-	var divNode = document.createElement('div');
+	var node = document.createElement(cfg.newLine ? 'div' : 'span');
 	var textNode = document.createTextNode(s);
-	var index = 0;
-	var slowPrint = function () {
-		if (s.charAt(index) === '\n') {
-			kcats.print(s.substring(++index), cfg);
-			return;
-		}
-		textNode.nodeValue += s.charAt(index);
-		++index;
-		if (index < s.length) {
-			window.setTimeout(slowPrint, Math.ceil(Math.random() * 25));
-		} else if (cfg.callback !== null) {
-			cfg.callback();
-		}
-	};
-	if (cfg.delay) {
-		textNode.nodeValue = '';
-	}
 	if (cfg.klass !== null) {
-		divNode.setAttribute('class', cfg.klass);
+		node.setAttribute('class', cfg.klass);
 	}
-	divNode.appendChild(textNode);
-	kcats.ui.screen.appendChild(divNode);
-	if (cfg.delay) {
-		slowPrint();
-	}
+	node.appendChild(textNode);
+	kcats.ui.screen.appendChild(node);
 };
 
 kcats.newLine = function () {
