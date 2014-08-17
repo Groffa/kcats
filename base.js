@@ -167,6 +167,7 @@ kcats.defineModule = function (fn) {
 			return false;
 		}
 	}
+	document.getElementsByTagName('head')[0].getElementsByTagName('title')[0].textContent = instance.name;
 	kcats.module.definition = fn;
 	kcats.module.instance = instance;
 	instance.startup();
