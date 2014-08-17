@@ -114,33 +114,40 @@ kcats.handleKey = function (keyCode) {
  * @param delay (Optional) If true, will print the characters one after another with a slight delay (default: false)
  * @param callback (Optional) Function to call upon print completion
  */
-kcats.print = function (s, delay, callback) {
+kcats.print = function (s, cfg) {
 	if (typeof s === 'undefined') {
 		return;
 	}
-	var delay = delay || false;
+	var cfg = expand(cfg, {
+		delay: false,
+		callback: null,
+		klass: null
+	});
 	var divNode = document.createElement('div');
 	var textNode = document.createTextNode(s);
 	var index = 0;
 	var slowPrint = function () {
 		if (s.charAt(index) === '\n') {
-			kcats.print(s.substring(++index), delay, callback);
+			kcats.print(s.substring(++index), cfg);
 			return;
 		}
 		textNode.nodeValue += s.charAt(index);
 		++index;
 		if (index < s.length) {
 			window.setTimeout(slowPrint, Math.ceil(Math.random() * 25));
-		} else if (typeof callback !== 'undefined') {
-			callback();
+		} else if (cfg.callback !== null) {
+			cfg.callback();
 		}
 	};
-	if (delay) {
+	if (cfg.delay) {
 		textNode.nodeValue = '';
+	}
+	if (cfg.klass !== null) {
+		divNode.setAttribute('class', cfg.klass);
 	}
 	divNode.appendChild(textNode);
 	kcats.ui.screen.appendChild(divNode);
-	if (delay) {
+	if (cfg.delay) {
 		slowPrint();
 	}
 };
